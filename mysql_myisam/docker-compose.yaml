@@ -1,0 +1,20 @@
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql57_myisam
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: myisam_test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_myisam_data:/var/lib/mysql
+      - ./sql/:/sql/
+
+volumes:
+  mysql_myisam_data:
+
