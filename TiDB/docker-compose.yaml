@@ -1,0 +1,64 @@
+services:
+  pd:
+    image: pingcap/pd:latest
+    container_name: pd
+    ports:
+      - "2379:2379"
+      - "2380:2380"
+    command:
+      - --name=pd
+      - --data-dir=/pd/data
+      - --client-urls=http://0.0.0.0:2379
+      - --peer-urls=http://0.0.0.0:2380
+      - --initial-cluster=pd=http://0.0.0.0:2380
+    volumes:
+      - pd-data:/pd/data
+    networks:
+      - tidb-network
+
+  tikv:
+    image: pingcap/tikv:latest
+    container_name: tikv
+    ports:
+      - "20160:20160"
+    command:
+      - --pd=pd:2379
+      - --addr=0.0.0.0:20160
+      - --data-dir=/tikv/data
+    depends_on:
+      - pd
+    volumes:
+      - tikv-data:/tikv/data
+    networks:
+      - tidb-network
+
+  tidb:
+    image: pingcap/tidb:latest
+    container_name: tidb
+    ports:
+      - "4000:4000"
+    command:
+      - --store=tikv
+      - --path=pd:2379
+      # - --log-level=info
+    depends_on:
+      - pd
+      - tikv
+    networks:
+      - tidb-network
+
+  mysql-client:
+    image: mysql:latest
+    container_name: mysql-client
+    depends_on:
+      - tidb
+    entrypoint: ["tail", "-f", "/dev/null"]
+    networks:
+      - tidb-network
+
+volumes:
+  pd-data:
+  tikv-data:
+
+networks:
+  tidb-network:
