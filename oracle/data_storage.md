@@ -1,7 +1,7 @@
 # Oracle data storage
 
 ## Datafiles
-
+- https://docs.oracle.com/en/database/oracle/oracle-database/19/admin/managing-data-files-and-temp-files.html#GUID-501A8889-3C18-4F99-B0B7-9095E981B970
 - Structure:
 
   - Data block (pages) - the smallest unit of I/O, typically sized from 2KB to 32KB, stores rows or their chunks
@@ -13,7 +13,6 @@
     - Row Data: The actual data stored in rows.
     - Free Space: Unused space available for new rows.
 
-
   - Extent - a collection of contiguous data blocks.
     - Command CREATE TABLESPACE allows you to define size of extents and their number by setting maxsize of tablespace.
 
@@ -24,27 +23,29 @@
     - Bitmapped blocks - leaf structure, describe the space usage of each block within a segment.
 
 ## Control Files
-- Format: Binary files.
-- Content: Control files maintain the state of the physical structure of the database. They store:
+- https://docs.oracle.com/cd/B10500_01/server.920/a96521/control.htm
+- Control files maintain the state of the physical structure of the database. They store:
   - Database name and timestamp of database creation.
   - Names and locations of datafiles and redo log files.
-  - Database checkpoint information.
+  - Checkpoint information.
   - Log sequence number.
   - Begin and end of backup information.
 
 ## Redo Log Files
-- Format: Binary files.
-- Content: Redo log files record all changes made to the database, essential for recovery operations. They contain:
+- https://docs.oracle.com/en/database/oracle/oracle-database/19/admin/managing-the-redo-log.html
+- Two or more preallocated files, which store all changes made to the database..
+- Essential for recovery operations. 
+- They contain:
   - Redo records (Change vectors).
   - Log sequence numbers (LSN).
 
 ## Archived Redo Log Files
-- Format: Binary files.
-- Content: These are copies of redo log files that have been archived before being reused. They ensure data can be recovered in the event of a failure.
+- https://docs.oracle.com/en/database/oracle/oracle-database/19/admin/managing-archived-redo-log-files.html#GUID-5EE4AC49-E1B2-41A2-BEE7-AA951EAAB2F3
+- Copies of redo log files that have been archived to ensure data can be recovered in the event of a failure.
+- //TODO??
 
 ## Parameter Files (PFILE/SPFILE)
-- Format: Text (PFILE) or binary (SPFILE) files.
-- Content: Configuration settings for the instance startup and operation.
+- Configuration settings for the instance startup and operation.
 
 ## Password File
 - Format: Binary file.

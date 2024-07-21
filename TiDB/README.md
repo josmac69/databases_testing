@@ -10,6 +10,7 @@
     - distributed key-value store used by TiDB for data storage. Responsible for persisting data, ensuring data consistency, and providing data retrieval capabilities. 
     - TiKV splits data into regions and replicates them across multiple nodes for fault tolerance.
     - TiKV uses RocksDB as its underlying storage engine. RocksDB is a high-performance key-value store optimized for flash storage. It uses a Log-Structured Merge-Tree (LSM-Tree) to manage data efficiently.
+    - https://www.pingcap.com/blog/rocksdb-in-tikv/
     - TiKV uses Titan - RocksDB plugin https://www.pingcap.com/blog/titan-storage-engine-design-and-implementation/
 
   - PD (Placement Driver) - cluster manager responsible for managing metadata, scheduling data distribution, and ensuring load balancing. It keeps track of all regions and their replicas, and it makes decisions about where data should reside.

@@ -3,6 +3,9 @@
 - It is a fork of Google's LevelDB, optimized to exploit multi-core processors (CPUs) and efficient use of fast storage.
 - There is also a MyRocks implementation of RocksDB for MySQL - see further.
 
+## Articles
+- [How RocksDB works](https://artem.krylysov.com/blog/2023/04/19/how-rocksdb-works/) - here are many useful articles
+
 ## MemTable and Write Ahead Log (WAL)
 - MemTable: An in-memory data structure that stores writes before they are flushed to disk. By default, RocksDB uses a skip list for the MemTable, but it can be configured to use other data structures like a vector or a hash table.
 - Write Ahead Log (WAL): A sequential log file where all write operations are recorded before being applied to the MemTable. This ensures durability and recoverability in case of a crash.
