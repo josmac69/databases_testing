@@ -1,2 +1,0 @@
-# Oracle data storage
-
